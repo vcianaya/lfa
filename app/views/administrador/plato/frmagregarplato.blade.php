@@ -1,5 +1,4 @@
 {{ Form::open(array('id'=>'formPlato')) }}
-{{ Form::hidden('correlativo',$correlativo->nrocorrelativo) }}
 <table>
 	<fieldset>
 		<legend>DATOS DEL PLATO</legend>
@@ -8,7 +7,7 @@
 				{{ Form::label('', 'Nombre :', array('class'=>'')) }}
 				</td>
 				<td>
-				{{ Form::text('nomplato', '', array('class'=>'form-control')) }}
+				{{ Form::text('nom_pla', '', array('class'=>'form-control')) }}
 				
 				</td>
 			</tr>
@@ -17,7 +16,8 @@
 				{{ Form::label('', 'Descripcion :', array('class'=>'')) }}
 				</td>
 				<td>
-				{{ Form::text('desplato', '', array('class'=>'form-control')) }}
+				{{ Form::text('des_pla', '', array('class'=>'form-control')) }}
+				
 				</td>
 			</tr>
 			<tr>
@@ -25,15 +25,7 @@
 				{{ Form::label('', 'Precio :', array('class'=>'')) }}
 				</td>
 				<td>
-				{{ Form::text('preplato', '', array('class'=>'form-control')) }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-				{{ Form::label('', 'Tiempo de preparacion :', array('class'=>'')) }}
-				</td>
-				<td>
-				{{ Form::text('tieplato', '', array('class'=>'form-control')) }}
+				{{ Form::text('pre_pla', '', array('class'=>'form-control')) }}
 				</td>
 			</tr>
 			<tr>
@@ -41,9 +33,10 @@
 				{{ Form::label('', 'Stock :', array('class'=>'')) }}
 				</td>
 				<td>
-				{{ Form::text('stockplato', '', array('class'=>'form-control')) }}
+				{{ Form::text('sto_pla', '', array('class'=>'form-control')) }}
 				</td>
-			</tr>			
+			</tr>
+</fieldset>					
 		</table>
-</fieldset>
+
 {{ Form::close() }}
