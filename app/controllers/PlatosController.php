@@ -20,14 +20,13 @@ class PlatosController extends BaseController {
 
     public function eguardarPlato()
   {
-    $id = Input::get('idplato');  
+    $id = Input::get('id_pla');  
     $_plato = array();
-    $_plato['nomplato'] = Input::get('nomplato');
-    $_plato['desplato'] = Input::get('desplato');
-    $_plato['preplato'] = Input::get('preplato');
-    $_plato['tieplato'] = Input::get('tieplato');
-    $_plato['stockplato'] = Input::get('stockplato');
-    DB::table('plato')->where('idplato','=',$id)->update($_plato);   
+     $_plato['NOM_PLA'] = Input::get('nom_pla');
+    $_plato['DES_PLA'] = Input::get('des_pla');
+    $_plato['PRE_PLA'] = Input::get('pre_pla');
+    $_plato['STO_PLA'] = Input::get('sto_pla');
+    DB::table('plato')->where('ID_PLA','=',$id)->update($_plato);   
     return json_encode(array('plato'=>$_plato));
   }
 
@@ -43,7 +42,8 @@ class PlatosController extends BaseController {
   }
   public function listarPlatos()
   {
-    $platos = DB::table('plato')->get();
+
+    $platos = DB::table('plato')->where('EST_PLA', '1')->get();
     return View::make('administrador.plato.administrarplato',array('platos'=>$platos));
   }
 
@@ -54,14 +54,16 @@ class PlatosController extends BaseController {
         $_datos['id_pla'] = $id;
         $_datos['nom_pla'] = $_plato->NOM_PLA;
         $_datos['des_pla'] = $_plato->DES_PLA; 
-        $_datos['pre_´pla'] = $_plato->PRE_PLA;        
+        $_datos['pre_pla'] = $_plato->PRE_PLA;        
         $_datos['sto_pla'] = $_plato->STO_PLA; 
         return View::make('administrador.plato.frmeditarplato',array('datos'=>$_datos));
     }
         public function eliminar(){
         $id = Input::get('id');
-        $_plato = DB::table('plato')->where('idplato','=',$id)->delete();
-        return json_encode(array('plato'=>$_plato));
-    }
+         $_plato = array();
+         $_plato['EST_PLA']='0';
+        DB::table('plato')->where('ID_PLA','=',$id)->update($_plato);   
+    return json_encode(array('plato'=>$_plato));
+}
 
 }
