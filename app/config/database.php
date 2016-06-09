@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'team',
+			'database'  => 'bd_restaurant',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

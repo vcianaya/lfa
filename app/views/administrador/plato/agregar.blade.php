@@ -22,7 +22,7 @@ _modal_plato = $('#Plato');
                                 console.log(response);
                                 _modal_plato.modal('hide');
                                 location.reload(true);
-                                window.location="{{URL::to('administrar/plato')}}";
+                                
                             }
                         });
                     });
