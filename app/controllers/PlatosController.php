@@ -49,8 +49,8 @@ class PlatosController extends BaseController {
 
   public function agregarPlato()
   {
-    $correlativo = DB::table('correlativo')->where('idcorrelativo', 1)->first();
-    return View::make('administrador.plato.frmagregarplato',array('correlativo'=>$correlativo));
+
+    return View::make('administrador.plato.frmagregarplato');
   }
   public function listarPlatos()
   {
