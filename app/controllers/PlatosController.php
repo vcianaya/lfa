@@ -10,22 +10,13 @@ class PlatosController extends BaseController {
  	public function guardarPlato()
 	{
     $_plato = array();
-    $_plato['idplato'] = Input::get('correlativo');
-    $_plato['nomplato'] = Input::get('nomplato');
-    $_plato['desplato'] = Input::get('desplato');
-    $_plato['preplato'] = Input::get('preplato');
-    $_plato['tieplato'] = Input::get('tieplato');
-    $_plato['stockplato'] = Input::get('stockplato');
-    $_plato['correlativo'] = 1;
+    $_plato['NOM_PLA'] = Input::get('nom_pla');
+    $_plato['DES_PLA'] = Input::get('des_pla');
+    $_plato['PRE_PLA'] = Input::get('pre_pla');
+    $_plato['STO_PLA'] = Input::get('sto_pla');
+   
     $insert = DB::table('plato')->insert($_plato);
-    if($insert)
-      {
-        $c=Input::get('correlativo');
-        $c=$c+1; 
-        DB::table('correlativo')
-            ->where('idcorrelativo', 1)
-            ->update(array('nrocorrelativo' => $c));
-      }        
+        
     return json_encode(array('plato'=>$_plato));
 	}
 
@@ -49,7 +40,7 @@ class PlatosController extends BaseController {
 
   public function agregarPlato()
   {
-
+    
     return View::make('administrador.plato.frmagregarplato');
   }
   public function listarPlatos()
