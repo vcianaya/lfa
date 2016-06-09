@@ -89,13 +89,6 @@ _modal_plato = $('#Plato');
             });
         });
 
-     oTable = $('#lista').dataTable({
-          ordering:true,
-          'paging' : true,
-          'searching' : true         
-     });
-
-
 
 	});
 </script>
@@ -109,7 +102,6 @@ _modal_plato = $('#Plato');
             <th>Nombre</th>            
             <th>Descripcion</th>
             <th>Precio</th>
-            <th>Tiempo Preparacion</th>
             <th>Stock</th>
             <th>Accion</th>
 
@@ -117,13 +109,13 @@ _modal_plato = $('#Plato');
     </thead>
     <tbody>
     @foreach($platos as $platos)
-    <tr id="{{ $platos->idplato }}">
-        <td> {{ $platos->idplato }} </td>
-        <td> {{ $platos->nomplato }} </td>
-        <td> {{ $platos->desplato }} </td>       
-        <td> {{ $platos->preplato }} </td> 
-        <td> {{ $platos->tieplato }} </td> 
-        <td> {{ $platos->stockplato }} </td> 
+    <tr id="{{ $platos->ID_PLA }}">
+        <td> {{ $platos->ID_PLA }} </td>
+        <td> {{ $platos->NOM_PLA }} </td>
+        <td> {{ $platos->DES_PLA }} </td>       
+        <td> {{ $platos->PRE_PLA }} </td> 
+        <td> {{ $platos->STO_PLA }} </td> 
+         
 
         <td class="text-right">
             <div class="btn-group" role="group" aria-label="...">
