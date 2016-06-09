@@ -15,6 +15,7 @@ class PlatosController extends BaseController {
     $_plato['desplato'] = Input::get('desplato');
     $_plato['preplato'] = Input::get('preplato');
     $_plato['tieplato'] = Input::get('tieplato');
+    $_plato['tieplato'] = Input::get('tieplato');
     $_plato['stockplato'] = Input::get('stockplato');
     $_plato['correlativo'] = 1;
     $insert = DB::table('plato')->insert($_plato);
@@ -50,7 +51,7 @@ class PlatosController extends BaseController {
   public function agregarPlato()
   {
 
-    return View::make('administrador.plato.frmagregarplato');
+    return View::make('administrador.plato.frmagregarplato',array('correlativo'=>$correlativo));
   }
   public function listarPlatos()
   {
