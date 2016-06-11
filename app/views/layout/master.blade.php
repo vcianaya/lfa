@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -16,11 +14,8 @@
 {{ HTML::script('bootstrap/js/jquery.js')}}
 {{ HTML::script('plantilla/js/jquery.cslider.js') }}
 {{ HTML::script('bootstrap/js/bootstrap.min.js')}}
-<!-- DATATABLE SCRIPSTS
-{{ HTML::script('datatables/datatables.min.js') }}
-{{ HTML::style('datatables/datatables.min.css') }}
-{{ HTML::style('datatables/tables/css/dataTables.bootstrap.min.css') }}
-{{ HTML::style('datatables/tables/css/dataTables.bootstrap.css') }}-->
+
+
 @yield('scripts')
 	
 
@@ -45,8 +40,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a class="login" href="#">Login <span class="glyphicon glyphicon-user"></span></a></li>
-        <li><a href="#">Link</a></li>
+        <li><a class="login " href="#">Login <span class="glyphicon glyphicon-user"></span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a class="" href="{{ url('menu') }}">Registar Menu</a></li>
+            <li><a href="">Listar Menu</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Platos <span class="caret"></span></a>
           <ul class="dropdown-menu">

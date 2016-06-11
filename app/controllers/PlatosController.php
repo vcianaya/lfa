@@ -14,6 +14,7 @@ class PlatosController extends BaseController {
     $_plato['DES_PLA'] = Input::get('des_pla');
     $_plato['PRE_PLA'] = Input::get('pre_pla');
     $_plato['STO_PLA'] = Input::get('sto_pla');
+    $_plato['EST_PLA'] = '1';
     $insert = DB::table('plato')->insert($_plato);
     return json_encode(array('plato'=>$_plato));
 	}
@@ -42,6 +43,7 @@ class PlatosController extends BaseController {
   }
   public function listarPlatos()
   {
+    
 
     $platos = DB::table('plato')->where('EST_PLA', '1')->get();
     return View::make('administrador.plato.administrarplato',array('platos'=>$platos));
@@ -59,7 +61,7 @@ class PlatosController extends BaseController {
         return View::make('administrador.plato.frmeditarplato',array('datos'=>$_datos));
     }
         public function eliminar(){
-        $id = Input::get('id');
+        $id = Input::get('idplato');
          $_plato = array();
          $_plato['EST_PLA']='0';
         DB::table('plato')->where('ID_PLA','=',$id)->update($_plato);   

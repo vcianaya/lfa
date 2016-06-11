@@ -33,7 +33,7 @@ _modal_plato = $('#Plato');
         $('.editarPlato').unbind().bind('click',function(e){
             e.preventDefault();            
             _fila = $(this).closest('tr');
-            _fila_id = _fila.attr('id');  
+            _fila_id = _fila.attr('id'); 
 
             $.ajax({
                 url: "{{ url('editar/plato') }}",
@@ -65,6 +65,7 @@ _modal_plato = $('#Plato');
             e.preventDefault();
             _fila = $(this).closest('tr');
             _fila_id = _fila.attr('id');
+            
             $.ajax({
                
                 success:function(response){                    
@@ -90,11 +91,12 @@ _modal_plato = $('#Plato');
         });
 
 
+
 	});
 </script>
 @overwrite
 @section('cuerpo')
-<div style="border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;border:1px #036 solid;margin-top:4px;padding:4px 0 4px 0;overflow:auto;">
+<div style="height:100%; overflow: scroll;">
         <table id="lista" class="table table-striped table-bordered">
         <thead>
         <tr>

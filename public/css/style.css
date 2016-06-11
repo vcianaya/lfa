@@ -1,0 +1,175 @@
+/* line 92, ../sass/_resets.scss */
+input, select {
+  vertical-align: middle;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot");
+  src: url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf") format("truetype"), url("../fonts/icomoon.woff") format("woff"), url("../fonts/icomoon.svg#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 74, ../sass/demo.scss */
+.container {
+  position: relative;
+  max-width: 1200px;
+  min-width: 400px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+/* line 91, ../sass/demo.scss */
+article {
+  background: #fff;
+  -webkit-border-radius: 2px 2px;
+  -moz-border-radius: 2px / 2px;
+  border-radius: 2px / 2px;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 20px 10px;
+  overflow: hidden;
+}
+/* line 97, ../sass/demo.scss */
+article .title {
+  background: #99301c;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-style: italic;
+  border-bottom: 5px solid #832918;
+}
+/* line 108, ../sass/demo.scss */
+article .desc {
+  padding: 20px;
+  color: #000;
+  font-style: italic;
+}
+/* line 113, ../sass/demo.scss */
+article.donate {
+  background: #99301c;
+}
+/* line 115, ../sass/demo.scss */
+article.donate .desc {
+  color: white;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: 300;
+  font-style: italic;
+}
+
+  
+
+@media only screen and (max-width: 920px) {
+  /* line 206, ../sass/demo.scss */
+  h1 {
+    font-size: 5em;
+  }
+}
+
+
+/*
+ *  Project: Babylon Grid sampl SASS/CSS
+ *  Description: Lightweight jQuery + CSS plugin for creating responsive, dynamic & customizable pinterest like grid with diferent colun width support and few display mods.
+ *  Author: Marek Fajkus @turbo_MaCk (http://marekrocks.it)
+ *  License: MIT
+ */
+/*
+ *  HOW TO:
+ *  Start with container class container-{ number of columns };
+ *  Set columns by class columns-{ column number } and set them width
+ */
+.babylongrid-container .column {
+  position: relative;
+  display: inline;
+  float: left; }
+.babylongrid-container.container-4 .column-1, .babylongrid-container.container-4 .column-3 {
+  width: 30%; }
+.babylongrid-container.container-4 .column-2, .babylongrid-container.container-4 .column-4 {
+  width: 20%; }
+.babylongrid-container.container-3 .column-1, .babylongrid-container.container-3 .column-2 {
+  width: 35%; }
+.babylongrid-container.container-3 .column-3 {
+  width: 30%; }
+.babylongrid-container.container-2 .column-1 {
+  width: 60%; }
+.babylongrid-container.container-2 .column-2 {
+  width: 40%; }
+.babylongrid-container.container-1 .column-1 {
+  width: 100%; }
+.babylongrid-container:after, .babylongrid-container:before {
+  content: '';
+  display: table;
+  height: 0;
+  clear: both; }
+.babylongrid-container.tower .column {
+  vertical-align: bottom; }
+.babylongrid-container.city .column {
+  vertical-align: middle; }
+
+.babylongrid-container.tower, .babylongrid-container.city {
+  display: table; }
+  .babylongrid-container.tower .column, .babylongrid-container.city .column {
+    display: table-cell;
+    float: none; }
+
+/*PAGINACION*/
+
+.wrapper{
+  width: 960px;
+  margin: 0 auto;
+}
+.pagination{
+  margin: 0 auto;
+}
+.pagination ul li{
+  float: left;
+  padding: 10px;
+  list-style: none;
+  width: auto;
+  margin: 0 auto;
+}
+.paginacion{
+  width: 500px;
+  margin: 0 auto;
+}
+.pagination a, .current, .previous_page, .next_page
+{
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+  color: #111;
+}
+ 
+.pagination *:first-child {
+  border-left-width: 1px;
+  -webkit-border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
+}
+.pagination *:last-child {
+  -webkit-border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+}
+.active a{
+  color: red;
+}
+
+.articulo{
+  background: #c40909;
+  color: #fff;
+  border: 4px solid gray;
+  width: 500px;
+  text-align: center;
+}
+body {
+  position: relative;
+}

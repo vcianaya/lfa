@@ -1,173 +1,230 @@
 @extends('layout.master')
+
 @section('scripts')
-<script type="text/javascript">
-	function agregar(data1,data2,data3){
-		$('#idproducto').val(data1);
-		$('#producto').val(data2);
-		$('#pre_pro').val(data3);
-	}
+{{ HTML::style('css/style.css')}}
+{{ HTML::script('js/jquery.babylongrid.js')}}
+@overwrite
+
+@section('cuerpo')
+<div class="contenedor" style="height:100%; overflow: scroll;">
+            <div id="babylongrid">
+                
+                @foreach($platos as $platos)
+                <article>
+                    <div class="h3 title">{{ $platos->NOM_PLA }}
+                    <a style="float: right;" onclick="ok({{ $platos->ID_PLA }})" class="btn btn-warning" id="{{ $platos->ID_PLA }}" href="#" role="button"><span class="glyphicon glyphicon-ok-sign" title="Agregar"></span></a>
+                    <input type="hidden" class="id" value="{{ $platos->ID_PLA }}">
+                    </div>
+                    <a href="#" class="icon-cloud-download"></a>
+                    <div class="desc">
+                        {{ $platos->DES_PLA }}
+                    </div>
+                </article>
+                @endforeach
+            </div>
+</div>
+                <script>
+            (function($){
+
+                $('#babylongrid').babylongrid({
+                    firstToRight: true
+                });
+
+                $('#babylongrid2').babylongrid({
+                    scheme: [
+                        {
+                            minWidth: 960,
+                            columns: 3
+                        },
+                        {
+                            minWidth: 500,
+                            columns: 2
+                        },
+                        {
+                            minWidth: 0,
+                            columns: 1
+                        }
+                    ],
+                    afterRender: function() {
+                        console.log('rendered');
+                    }
+                });
+
+                $('#babylongrid3').babylongrid({
+                    display: 'tower'
+                });
+
+                $('#babylongrid4').babylongrid({
+                    display: 'city'
+                });
+
+            }(jQuery));
+        </script>
+        <script type="text/javascript">
+$(document).ready(function(){
+_modal_plato = $('#Plato');
+
+        $('.registrarPlato').unbind().bind('click',function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "{{ url('agregar/plato') }}",
+                
+                success:function(response){
+                    _modal_plato.find('.modal-body').html(response);    
+                    _modal_plato.find('.btn-guardar').unbind().bind('click',function(e){
+                        e.preventDefault();
+                        $.ajax({
+                            type:'post',   
+                            dataType: 'json',
+                            url: "{{ url('guardar/plato') }}",
+                            data: _modal_plato.find('#formPlato').serialize(),
+                            success: function(response){
+                                console.log(response);
+                                _modal_plato.modal('hide');
+                                location.reload(true);
+                            }
+                        });
+                    });
+                    _modal_plato.modal('show');     
+                }
+            });
+        });
+
+        $('.editarPlato').unbind().bind('click',function(e){
+            e.preventDefault();            
+            _fila = $(this).closest('tr');
+            _fila_id = _fila.attr('id');  
+
+            $.ajax({
+                url: "{{ url('editar/plato') }}",
+                data:{ id: _fila_id },
+
+                success:function(response){
+                    _modal_plato.find('.modal-body').html(response);      
+                    _modal_plato.find('.btn-guardar').unbind().bind('click',function(e){
+                        e.preventDefault();
+                        $.ajax({
+                            type:'post',   
+                            dataType: 'json',
+                            url: "{{ url('editguarda/plato') }}",
+                            data: _modal_plato.find('#formPlato').serialize(),
+                            success: function(response){
+                                console.log(response);
+                                _modal_plato.modal('hide');
+                                location.reload(true);
+                            }
+                        });
+                    });
+                    _modal_plato.modal('show');  
+                               
+                }
+            });
+        });
+
+    $('.btn-eliminar').unbind().bind('click',function(e){
+            e.preventDefault();
+            _fila = $(this).closest('tr');
+            _fila_id = _fila.attr('id');
+
+            $.ajax({
+               
+                success:function(response){                    
+                    
+                        _modal_plato.find('.modal-title').html('Confirmaci&oacute;n');
+                        _modal_plato.find('.modal-body').html('Esta seguro de eliminar este registro?');
+                        _modal_plato.find('.modal-footer').find('.btn-primary').unbind().bind('click',function(e){
+                            e.preventDefault();
+                            _modal_plato.modal('hide');
+                            $.ajax({
+                                type:'post',                
+                                dataType: 'json',
+                                url: "{{ url('eliminar/plato') }}",
+                                data: {idplato:_fila_id},
+                                success: function(response){                    
+                                    _fila.remove();                
+                                }
+                            });
+                        });                    
+                        _modal_plato.modal('show');                                     
+                }
+            });
+        });
+   
+
+    });
+/*DESDE AQUI EL CODIGO DE MENU*/
+function ok($id)
+    {
+        _modal_menu = $('#menu');
+        _plato = $id;
+        console.log(_plato);
+         $.ajax({
+                
+                url: "{{ 'ver' }}",
+                data: {id:_plato},
+                
+                success:function(response){
+                    _modal_menu.find('.modal-body').html(response);    
+                    _modal_menu.find('.btn-guardar').unbind().bind('click',function(e){
+                        e.preventDefault();
+                        $.ajax({
+                            type:'post',   
+                            dataType: 'json',
+                            url: "{{ url('guardar/plato') }}",
+                            data: _modal_menu.find('#formPlato').serialize(),
+                            success: function(response){
+                                console.log(response);
+                                _modal_menu.modal('hide');
+                                location.reload(true);
+                            }
+                        });
+                    });
+                    _modal_menu.modal('show');     
+                }
+            });
+    };
+
+
 </script>
+<!--MODAL LOGIN-->
+<div id="Plato" class="modal fade" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">LOGIN</h4>
+            </div>
+            <div class="modal-body" >
+                
+                     
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-guardar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="menu" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">MENU</h4>
+
+            </div>
+            <div class="modal-body">
+                
+
+            </div>
+            <div class="modal-footer">
+              
+                <button type="button" class="btn btn-primary aceptar">Continuar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @overwrite
-@section('cuerpo')
-<fieldset>
-<legend class="alert alert-success">Registrar Menu</legend>
-<div style="padding:15px;">
-<script type="text/javascript">
-              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeIn(2500); },0000); });
-              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeOut(2500); },5000); });
-            </script>
-         <?php if (Session::has('mensaje2')):
-            ?>
-                  <div class="mensajewarning alert alert-danger" ><label><?php echo Session::get('mensaje2');?></label></div>
-         <?php endif;?>
-         <?php if (Session::has('mensaje')):
-            ?>
-                  <div class="mensajewarning alert alert-success"><label><?php echo Session::get('mensaje');?></label></div>
-         <?php endif;?>
-       @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-	 <form class="form-horizontal" action="registrarcliente" method="POST">
-
-    <div class="form-group">
-    <label for="ejemplo_email_3" class="col-lg-3 control-label">Nombre del menu</label>
-    <div class="col-lg-9">
-      <input type="email" name="ema_usu" value="" class="form-control" id="ejemplo_email_3"
-             placeholder="Nombre del menu">
-
-    </div>
-    </div>
-
-    <div class="form-group">
-    <label for="ejemplo_email_3" class="col-lg-3 control-label">Descripcion</label>
-    <div class="col-lg-9">
-    <textarea type="text" name="dir_usu" value="" class="form-control" id="ejemplo_email_3"
-             placeholder="Descripcion de menu"></textarea>
-    </div>
-    </div>
-    <fieldset class="">
-    	<legend>PLATOS</legend>
-    	
-	<button class="btn btn-success" id="agregar" type="button" data-toggle = "modal" data-target = "#myModal"><span class="glyphicon glyphicon-shopping-cart"></span> Agregar producto</button>
-				<br/>
-				</br>
-    	<table id="tabla" style=" margin-left:5%;" class="table table-responsive table-hover">
-	<!-- Cabecera de la tabla -->
-						<thead>
-							<tr class="active">
-								
-								<th>Producto</th>
-								<th>Precio</th>
-								
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
- 
-	<!-- Cuerpo de la tabla con los campos -->
-						<tbody class="table-hover">
-		<!-- fila base para clonar y agregar al final -->
-							<tr> 
-								
-								<td><input type="text" class="form-control" id="producto" name="producto[]" style="width:280px;" readonly="readonly"/></td>
-								<input type="hidden" class="form-control" id="idproducto" name="idproducto[]" style="width:280px;" readonly="readonly"/>
-								<input type="hidden" class="form-control" id="pro_pin" name="pro_pin[]" style="width:280px;" readonly="readonly"/>
-								<td><input type="text" class="form-control" id="pre_pro" name="pre_pro[]" style="width:80px;" readonly="readonly"/></td>
-                
-							  
-								<td class="eliminar btn btn-danger" ><span class="glyphicon glyphicon-remove"></span>Eliminar</td>								
-							</tr>
-		<!-- fin de código: fila base -->
- 
-		<!-- Fila de ejemplo -->
-							
-		<!-- fin de código: fila de ejemplo -->
- 
-						</tbody>
-					</table>
-    </fieldset>
-    <div class = "modal-footer">
-            <button type = "submit" class = "btn btn-success" data-dismiss = "modal"><span class="glyphicon glyphicon-check"></span>
-              Registrar Menu
-            </button>
-            
-            <button type = "button" class = "btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
-               Limpiar datos
-            </button>
-         </div>
-</form>
-
-<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
-   
-   <div class = "modal-dialog">
-      <div class = "modal-content">
-         
-         <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                  &times;
-            </button>
-            
-            <h4 class = "modal-title" id = "myModalLabel">
-               Platos disponibles
-            </h4>
-         </div>
-         
-         <div class = "modal-body">
-         <div style="padding-left:20px;" class="table table-responsive">
-        <table id="example" class="table table-hover" cellspacing="5" width="100%" style="">
-        <thead>
-        <tr class="info">
-            <th>IdPlato</th>
-            <th>Nombre</th>            
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Tiempo Preparacion</th>
-            <th>Stock</th>
-            <th>Accion</th>
-
-        </tr>
-    </thead>
-    <tbody>
-    @foreach($platos as $platos)
-    <tr id="{{ $platos->idplato }}">
-        <td> {{ $platos->idplato }} </td>
-        <td> {{ $platos->nomplato }} </td>
-        <td> {{ $platos->desplato }} </td>       
-        <td> {{ $platos->preplato }} </td> 
-        <td> {{ $platos->tieplato }} </td> 
-        <td> {{ $platos->stockplato }} </td> 
-
-        <td class="text-right">
-            <div class="btn-group" role="group" aria-label="...">
-               <?php $id = "'".$platos->idplato."'";
-               		 $prod = "'".$platos->nomplato."'";
-               		 $pre = "'".$platos->preplato."'";?>
-                <button onClick="javascript:agregar(<?php echo $id.','.$prod.','.$pre;?>);" data-dismiss = "modal" class="btn btn-success editar-medidor">
-                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>                
-               
-            </div>
-        </td>
-    </tr>
-    @endforeach 
-    </tbody>
-        </table>
-
-</div>
-
-         </div>
-         
-      </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-  
-</div><!-- /.modal -->
-  </div>
-</div>
- @overwrite
 @stop
